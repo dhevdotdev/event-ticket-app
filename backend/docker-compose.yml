@@ -1,15 +1,4 @@
 services:
-  # Our PostgreSQL database
-  db:
-    # Using the latest PostgreSQL image
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    restart: always
-    environment:
-      POSTGRES_PASSWORD: changemeinprod!
-
-  # Database management interface
   adminer:
     image: adminer:latest
     restart: always
