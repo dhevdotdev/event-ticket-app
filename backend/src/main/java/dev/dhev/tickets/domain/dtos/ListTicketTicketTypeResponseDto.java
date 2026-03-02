@@ -1,5 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class ListTicketTicketTypeResponseDto {
   private UUID id;
   private String name;
-  private Double price;
+  private BigDecimal price;
 
 }

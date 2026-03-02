@@ -1,6 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
-import dev.dhev.tickets.domain.entities.EventStatusEnum;
+import dev.dhev.tickets.domain.entities.EventStatus;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -31,7 +31,7 @@ public class CreateEventRequestDto {
   private LocalDateTime salesEnd;
 
   @NotNull(message = "Event status must be provided")
-  private EventStatusEnum status;
+  private EventStatus status;
 
   @NotEmpty(message = "At least one ticket type is required")
   @Valid

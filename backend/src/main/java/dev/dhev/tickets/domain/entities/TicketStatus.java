@@ -1,5 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-public enum TicketStatusEnum {
+public enum TicketStatus {
   PURCHASED, CANCELLED
 }

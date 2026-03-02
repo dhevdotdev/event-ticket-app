@@ -1,5 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-public enum EventStatusEnum {
+public enum EventStatus {
   DRAFT, PUBLISHED, CANCELLED, COMPLETED
 }

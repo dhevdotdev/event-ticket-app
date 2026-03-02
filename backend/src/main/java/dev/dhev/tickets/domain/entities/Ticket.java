@@ -42,7 +42,7 @@ public class Ticket {
 
   @Column(name = "status", nullable = false)
   @Enumerated(EnumType.STRING)
-  private TicketStatusEnum status;
+  private TicketStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "ticket_type_id")
@@ -52,10 +52,10 @@ public class Ticket {
   @JoinColumn(name = "purchaser_id")
   private User purchaser;
 
-  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<TicketValidation> validations = new ArrayList<>();
 
-  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<QrCode> qrCodes = new ArrayList<>();
 
   @CreatedDate

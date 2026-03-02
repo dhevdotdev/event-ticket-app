@@ -1,5 +1,6 @@
 package dev.dhev.tickets.domain;
 
+import java.math.BigDecimal;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,7 +11,7 @@ import lombok.NoArgsConstructor;
 public class CreateTicketTypeRequest {
 
   private String name;
-  private Double price;
+  private BigDecimal price;
   private String description;
   private Integer totalAvailable;
 }

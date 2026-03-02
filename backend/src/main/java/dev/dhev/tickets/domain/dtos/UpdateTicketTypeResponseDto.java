@@ -1,5 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -13,7 +14,7 @@ public class UpdateTicketTypeResponseDto {
 
   private UUID id;
   private String name;
-  private Double price;
+  private BigDecimal price;
   private String description;
   private Integer totalAvailable;
   private LocalDateTime createdAt;

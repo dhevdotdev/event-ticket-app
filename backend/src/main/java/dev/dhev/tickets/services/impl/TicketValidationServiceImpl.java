@@ -1,11 +1,11 @@
 package dev.dhev.tickets.services.impl;
 
 import dev.dhev.tickets.domain.entities.QrCode;
-import dev.dhev.tickets.domain.entities.QrCodeStatusEnum;
+import dev.dhev.tickets.domain.entities.QrCodeStatus;
 import dev.dhev.tickets.domain.entities.Ticket;
 import dev.dhev.tickets.domain.entities.TicketValidation;
 import dev.dhev.tickets.domain.entities.TicketValidationMethod;
-import dev.dhev.tickets.domain.entities.TicketValidationStatusEnum;
+import dev.dhev.tickets.domain.entities.TicketValidationStatus;
 import dev.dhev.tickets.exceptions.QrCodeNotFoundException;
 import dev.dhev.tickets.exceptions.TicketNotFoundException;
 import dev.dhev.tickets.repositories.QrCodeRepository;
@@ -28,7 +28,7 @@ public class TicketValidationServiceImpl implements TicketValidationService {
 
   @Override
   public TicketValidation validateTicketByQrCode(UUID qrCodeId) {
-    QrCode qrCode = qrCodeRepository.findByIdAndStatus(qrCodeId, QrCodeStatusEnum.ACTIVE)
+    QrCode qrCode = qrCodeRepository.findByIdAndStatus(qrCodeId, QrCodeStatus.ACTIVE)
         .orElseThrow(() -> new QrCodeNotFoundException(
             String.format(
                 "QR Code with ID %s was not found", qrCodeId
@@ -46,11 +46,11 @@ public class TicketValidationServiceImpl implements TicketValidationService {
     ticketValidation.setTicket(ticket);
     ticketValidation.setValidationMethod(ticketValidationMethod);
 
-    TicketValidationStatusEnum ticketValidationStatus = ticket.getValidations().stream()
-        .filter(v -> TicketValidationStatusEnum.VALID.equals(v.getStatus()))
+    TicketValidationStatus ticketValidationStatus = ticket.getValidations().stream()
+        .filter(v -> TicketValidationStatus.VALID.equals(v.getStatus()))
         .findFirst()
-        .map(v -> TicketValidationStatusEnum.INVALID)
-        .orElse(TicketValidationStatusEnum.VALID);
+        .map(v -> TicketValidationStatus.INVALID)
+        .orElse(TicketValidationStatus.VALID);
 
     ticketValidation.setStatus(ticketValidationStatus);
 

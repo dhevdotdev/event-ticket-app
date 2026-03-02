@@ -1,7 +1,7 @@
 package dev.dhev.tickets.services.impl;
 
 import dev.dhev.tickets.domain.entities.Ticket;
-import dev.dhev.tickets.domain.entities.TicketStatusEnum;
+import dev.dhev.tickets.domain.entities.TicketStatus;
 import dev.dhev.tickets.domain.entities.TicketType;
 import dev.dhev.tickets.domain.entities.User;
 import dev.dhev.tickets.exceptions.TicketTypeNotFoundException;
@@ -46,7 +46,7 @@ public class TicketTypeServiceImpl implements TicketTypeService {
     }
 
     Ticket ticket = new Ticket();
-    ticket.setStatus(TicketStatusEnum.PURCHASED);
+    ticket.setStatus(TicketStatus.PURCHASED);
     ticket.setTicketType(ticketType);
     ticket.setPurchaser(user);
 

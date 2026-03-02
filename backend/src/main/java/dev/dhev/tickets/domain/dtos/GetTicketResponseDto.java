@@ -1,6 +1,7 @@
 package dev.dhev.tickets.domain.dtos;
 
-import dev.dhev.tickets.domain.entities.TicketStatusEnum;
+import dev.dhev.tickets.domain.entities.TicketStatus;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -12,8 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class GetTicketResponseDto {
   private UUID id;
-  private TicketStatusEnum status;
-  private Double price;
+  private TicketStatus status;
+  private BigDecimal price;
   private String description;
   private String eventName;
   private String eventVenue;

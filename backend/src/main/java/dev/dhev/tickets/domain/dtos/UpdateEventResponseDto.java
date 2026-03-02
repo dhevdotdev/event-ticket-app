@@ -1,6 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
-import dev.dhev.tickets.domain.entities.EventStatusEnum;
+import dev.dhev.tickets.domain.entities.EventStatus;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
@@ -20,7 +20,7 @@ public class UpdateEventResponseDto {
   private String venue;
   private LocalDateTime salesStart;
   private LocalDateTime salesEnd;
-  private EventStatusEnum status;
+  private EventStatus status;
   private List<UpdateTicketTypeResponseDto> ticketTypes;
   private LocalDateTime createdAt;
   private LocalDateTime updatedAt;

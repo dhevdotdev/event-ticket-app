@@ -1,5 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
+import java.math.BigDecimal;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
@@ -17,7 +18,7 @@ public class CreateTicketTypeRequestDto {
 
   @NotNull(message = "Price is required")
   @PositiveOrZero(message = "Price must be zero or greater")
-  private Double price;
+  private BigDecimal price;
 
   private String description;
 

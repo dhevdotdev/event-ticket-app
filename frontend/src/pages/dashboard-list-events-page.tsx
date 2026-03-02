@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/card";
 import {
   EventSummary,
-  EventStatusEnum,
+  EventStatus,
   SpringBootPagination,
 } from "@/domain/domain";
 import { deleteEvent, listEvents } from "@/lib/api";
@@ -95,15 +95,15 @@ const DashboardListEventsPage: React.FC = () => {
     });
   };
 
-  const formatStatusBadge = (status: EventStatusEnum) => {
+  const formatStatusBadge = (status: EventStatus) => {
     switch (status) {
-      case EventStatusEnum.DRAFT:
+      case EventStatus.DRAFT:
         return "bg-gray-700 text-gray-200";
-      case EventStatusEnum.PUBLISHED:
+      case EventStatus.PUBLISHED:
         return "bg-green-700 text-green-100";
-      case EventStatusEnum.CANCELLED:
+      case EventStatus.CANCELLED:
         return "bg-red-700 text-red-100";
-      case EventStatusEnum.COMPLETED:
+      case EventStatus.COMPLETED:
         return "bg-blue-700 text-blue-100";
       default:
         return "bg-gray-700 text-gray-200";

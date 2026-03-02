@@ -11,6 +11,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,8 +42,8 @@ public class TicketType {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "price", nullable = false)
-  private Double price;
+  @Column(name = "price", nullable = false, precision = 10, scale = 2)
+  private BigDecimal price;
 
   @Column(name = "description")
   private String description;
@@ -54,7 +55,7 @@ public class TicketType {
   @JoinColumn(name = "event_id")
   private Event event;
 
-  @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<Ticket> tickets = new ArrayList<>();
 
   @CreatedDate

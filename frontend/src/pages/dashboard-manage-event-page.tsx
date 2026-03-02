@@ -32,7 +32,7 @@ import {
   CreateEventRequest,
   CreateTicketTypeRequest,
   EventDetails,
-  EventStatusEnum,
+  EventStatus,
   UpdateEventRequest,
   UpdateTicketTypeRequest,
 } from "@/domain/domain";
@@ -142,7 +142,7 @@ interface EventData {
   salesEndDate: Date | undefined;
   salesEndTime: string | undefined;
   ticketTypes: TicketTypeData[];
-  status: EventStatusEnum;
+  status: EventStatus;
   createdAt: Date | undefined;
   updatedAt: Date | undefined;
 }
@@ -166,7 +166,7 @@ const DashboardManageEventPage: React.FC = () => {
     salesEndDate: undefined,
     salesEndTime: undefined,
     ticketTypes: [],
-    status: EventStatusEnum.DRAFT,
+    status: EventStatus.DRAFT,
     createdAt: undefined,
     updatedAt: undefined,
   });
@@ -749,8 +749,8 @@ const DashboardManageEventPage: React.FC = () => {
                 <SelectValue placeholder="Select Event Status" />
               </SelectTrigger>
               <SelectContent className="bg-gray-900 border-gray-700 text-white">
-                <SelectItem value={EventStatusEnum.DRAFT}>Draft</SelectItem>
-                <SelectItem value={EventStatusEnum.PUBLISHED}>
+                <SelectItem value={EventStatus.DRAFT}>Draft</SelectItem>
+                <SelectItem value={EventStatus.PUBLISHED}>
                   Published
                 </SelectItem>
               </SelectContent>

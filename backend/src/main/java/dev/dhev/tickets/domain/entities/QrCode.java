@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -37,7 +35,7 @@ public class QrCode {
 
   @Column(name = "status", nullable = false)
   @Enumerated(EnumType.STRING)
-  private QrCodeStatusEnum status;
+  private QrCodeStatus status;
 
   @Column(name = "value", columnDefinition = "TEXT", nullable = false)
   private String value;
@@ -56,9 +54,9 @@ public class QrCode {
 
   @Override
   public boolean equals(Object o) {
-      if (o == null || getClass() != o.getClass()) {
-          return false;
-      }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
     QrCode qrCode = (QrCode) o;
     return Objects.equals(id, qrCode.id) && status == qrCode.status && Objects.equals(value,
         qrCode.value) && Objects.equals(createdAt, qrCode.createdAt) && Objects.equals(updatedAt,

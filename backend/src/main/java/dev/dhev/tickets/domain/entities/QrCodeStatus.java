@@ -1,5 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-public enum QrCodeStatusEnum {
+public enum QrCodeStatus {
   ACTIVE, EXPIRED
 }

@@ -4,7 +4,7 @@ import dev.dhev.tickets.domain.CreateEventRequest;
 import dev.dhev.tickets.domain.UpdateEventRequest;
 import dev.dhev.tickets.domain.UpdateTicketTypeRequest;
 import dev.dhev.tickets.domain.entities.Event;
-import dev.dhev.tickets.domain.entities.EventStatusEnum;
+import dev.dhev.tickets.domain.entities.EventStatus;
 import dev.dhev.tickets.domain.entities.TicketType;
 import dev.dhev.tickets.domain.entities.User;
 import dev.dhev.tickets.exceptions.EventNotFoundException;
@@ -153,7 +153,7 @@ public class EventServiceImpl implements EventService {
 
   @Override
   public Page<Event> listPublishedEvents(Pageable pageable) {
-    return eventRepository.findByStatus(EventStatusEnum.PUBLISHED, pageable);
+    return eventRepository.findByStatus(EventStatus.PUBLISHED, pageable);
   }
 
   @Override
@@ -163,7 +163,7 @@ public class EventServiceImpl implements EventService {
 
   @Override
   public Optional<Event> getPublishedEvent(UUID id) {
-    return eventRepository.findByIdAndStatus(id, EventStatusEnum.PUBLISHED);
+    return eventRepository.findByIdAndStatus(id, EventStatus.PUBLISHED);
   }
 
 

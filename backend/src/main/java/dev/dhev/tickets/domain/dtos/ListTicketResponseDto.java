@@ -1,6 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
-import dev.dhev.tickets.domain.entities.TicketStatusEnum;
+import dev.dhev.tickets.domain.entities.TicketStatus;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ListTicketResponseDto {
   private UUID id;
-  private TicketStatusEnum status;
+  private TicketStatus status;
   private ListTicketTicketTypeResponseDto ticketType;
 }

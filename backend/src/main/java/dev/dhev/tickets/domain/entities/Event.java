@@ -44,24 +44,24 @@ public class Event {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "event_start")
+  @Column(name = "starts_at")
   private LocalDateTime start;
 
-  @Column(name = "event_end")
+  @Column(name = "ends_at")
   private LocalDateTime end;
 
   @Column(name = "venue", nullable = false)
   private String venue;
 
-  @Column(name = "sales_start")
+  @Column(name = "sales_starts_at")
   private LocalDateTime salesStart;
 
-  @Column(name = "sales_end")
+  @Column(name = "sales_ends_at")
   private LocalDateTime salesEnd;
 
   @Column(name = "status", nullable = false)
   @Enumerated(EnumType.STRING)
-  private EventStatusEnum status;
+  private EventStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "organizer_id")

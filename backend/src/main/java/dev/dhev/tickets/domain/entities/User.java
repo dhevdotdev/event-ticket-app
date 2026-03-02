@@ -1,6 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -36,10 +35,10 @@ public class User {
   @Column(name = "name", nullable = false)
   private String name;
 
-  @Column(name = "email", nullable = false)
+  @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  @OneToMany(mappedBy = "organizer", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "organizer")
   private List<Event> organizedEvents = new ArrayList<>();
 
   @ManyToMany

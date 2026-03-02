@@ -1,7 +1,7 @@
 package dev.dhev.tickets.services.impl;
 
 import dev.dhev.tickets.domain.entities.QrCode;
-import dev.dhev.tickets.domain.entities.QrCodeStatusEnum;
+import dev.dhev.tickets.domain.entities.QrCodeStatus;
 import dev.dhev.tickets.domain.entities.Ticket;
 import dev.dhev.tickets.exceptions.QrCodeGenerationException;
 import dev.dhev.tickets.exceptions.QrCodeNotFoundException;
@@ -41,7 +41,7 @@ public class QrCodeServiceImpl implements QrCodeService {
 
       QrCode qrCode = new QrCode();
       qrCode.setId(uniqueId);
-      qrCode.setStatus(QrCodeStatusEnum.ACTIVE);
+      qrCode.setStatus(QrCodeStatus.ACTIVE);
       qrCode.setValue(qrCodeImage);
       qrCode.setTicket(ticket);
 

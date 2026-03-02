@@ -12,7 +12,7 @@ export const isErrorResponse = (obj: any): obj is ErrorResponse => {
   );
 };
 
-export enum EventStatusEnum {
+export enum EventStatus {
   DRAFT = "DRAFT",
   PUBLISHED = "PUBLISHED",
   CANCELLED = "CANCELLED",
@@ -33,7 +33,7 @@ export interface CreateEventRequest {
   venue: string;
   salesStart?: Date;
   salesEnd?: Date;
-  status: EventStatusEnum;
+  status: EventStatus;
   ticketTypes: CreateTicketTypeRequest[];
 }
 
@@ -53,7 +53,7 @@ export interface UpdateEventRequest {
   venue: string;
   salesStart?: Date;
   salesEnd?: Date;
-  status: EventStatusEnum;
+  status: EventStatus;
   ticketTypes: UpdateTicketTypeRequest[];
 }
 
@@ -73,7 +73,7 @@ export interface EventSummary {
   venue: string;
   salesStart?: Date;
   salesEnd?: Date;
-  status: EventStatusEnum;
+  status: EventStatus;
   ticketTypes: TicketTypeSummary[];
 }
 
@@ -101,7 +101,7 @@ export interface EventDetails {
   venue: string;
   salesStart?: Date;
   salesEnd?: Date;
-  status: EventStatusEnum;
+  status: EventStatus;
   ticketTypes: TicketTypeDetails[];
   createdAt: Date;
   updatedAt: Date;

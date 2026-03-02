@@ -1,6 +1,6 @@
 package dev.dhev.tickets.domain.dtos;
 
-import dev.dhev.tickets.domain.entities.EventStatusEnum;
+import dev.dhev.tickets.domain.entities.EventStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +21,6 @@ public class ListEventResponseDto {
   private String venue;
   private LocalDateTime salesStart;
   private LocalDateTime salesEnd;
-  private EventStatusEnum status;
+  private EventStatus status;
   private List<ListEventTicketTypeResponseDto> ticketTypes = new ArrayList<>();
 }
