@@ -1,6 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -55,7 +54,7 @@ public class TicketType {
   @JoinColumn(name = "event_id")
   private Event event;
 
-  @OneToMany(mappedBy = "ticketType", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "ticketType", orphanRemoval = true)
   private List<Ticket> tickets = new ArrayList<>();
 
   @CreatedDate

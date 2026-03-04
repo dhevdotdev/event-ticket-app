@@ -1,6 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -73,7 +72,7 @@ public class Event {
   @ManyToMany(mappedBy = "staffingEvents")
   private List<User> staff = new ArrayList<>();
 
-  @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "event", orphanRemoval = true)
   private List<TicketType> ticketTypes = new ArrayList<>();
 
   @CreatedDate

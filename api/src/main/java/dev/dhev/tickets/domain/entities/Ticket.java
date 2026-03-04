@@ -1,6 +1,5 @@
 package dev.dhev.tickets.domain.entities;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -52,10 +51,10 @@ public class Ticket {
   @JoinColumn(name = "purchaser_id")
   private User purchaser;
 
-  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "ticket", orphanRemoval = true)
   private List<TicketValidation> validations = new ArrayList<>();
 
-  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+  @OneToMany(mappedBy = "ticket", orphanRemoval = true)
   private List<QrCode> qrCodes = new ArrayList<>();
 
   @CreatedDate
