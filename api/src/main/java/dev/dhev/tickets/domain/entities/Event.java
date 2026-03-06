@@ -23,8 +23,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "events")
@@ -33,7 +31,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Event {
+public class Event extends BaseEntity {
 
   @Id
   @Column(name = "id", updatable = false, nullable = false)
@@ -75,14 +73,6 @@ public class Event {
   @OneToMany(mappedBy = "event", orphanRemoval = true)
   private List<TicketType> ticketTypes = new ArrayList<>();
 
-  @CreatedDate
-  @Column(name = "created_at", updatable = false, nullable = false)
-  private LocalDateTime createdAt;
-
-  @LastModifiedDate
-  @Column(name = "updated_at", nullable = false)
-  private LocalDateTime updatedAt;
-
   @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) {
@@ -92,13 +82,13 @@ public class Event {
     return Objects.equals(id, event.id) && Objects.equals(name, event.name) && Objects.equals(start,
         event.start) && Objects.equals(end, event.end) && Objects.equals(venue, event.venue)
         && Objects.equals(salesStart, event.salesStart) && Objects.equals(salesEnd, event.salesEnd)
-        && status == event.status && Objects.equals(createdAt, event.createdAt) && Objects.equals(
-        updatedAt, event.updatedAt);
+        && status == event.status && Objects.equals(getCreatedAt(), event.getCreatedAt())
+        && Objects.equals(getUpdatedAt(), event.getUpdatedAt());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, start, end, venue, salesStart, salesEnd, status, createdAt,
-        updatedAt);
+    return Objects.hash(id, name, start, end, venue, salesStart, salesEnd, status, getCreatedAt(),
+        getUpdatedAt());
   }
 }

@@ -11,7 +11,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
-import java.time.LocalDateTime;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -19,8 +18,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "ticket_validations")
@@ -29,7 +26,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TicketValidation {
+public class TicketValidation extends BaseEntity {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)
@@ -48,26 +45,18 @@ public class TicketValidation {
   @JoinColumn(name = "ticket_id")
   private Ticket ticket;
 
-  @CreatedDate
-  @Column(name = "created_at", updatable = false, nullable = false)
-  private LocalDateTime createdAt;
-
-  @LastModifiedDate
-  @Column(name = "updated_at", nullable = false)
-  private LocalDateTime updatedAt;
-
   @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
     TicketValidation that = (TicketValidation) o;
-    return Objects.equals(id, that.id) && status == that.status && Objects.equals(createdAt,
-        that.createdAt) && Objects.equals(updatedAt, that.updatedAt);
+    return Objects.equals(id, that.id) && status == that.status && Objects.equals(getCreatedAt(),
+        that.getCreatedAt()) && Objects.equals(getUpdatedAt(), that.getUpdatedAt());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, status, createdAt, updatedAt);
+    return Objects.hash(id, status, getCreatedAt(), getUpdatedAt());
   }
 }

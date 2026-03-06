@@ -11,7 +11,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -21,8 +20,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 @Entity
 @Table(name = "ticket_types")
@@ -31,7 +28,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TicketType {
+public class TicketType extends BaseEntity {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)
@@ -57,14 +54,6 @@ public class TicketType {
   @OneToMany(mappedBy = "ticketType", orphanRemoval = true)
   private List<Ticket> tickets = new ArrayList<>();
 
-  @CreatedDate
-  @Column(name = "created_at", updatable = false, nullable = false)
-  private LocalDateTime createdAt;
-
-  @LastModifiedDate
-  @Column(name = "updated_at", nullable = false)
-  private LocalDateTime updatedAt;
-
   @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) {
@@ -73,12 +62,12 @@ public class TicketType {
     TicketType that = (TicketType) o;
     return Objects.equals(id, that.id) && Objects.equals(name, that.name) && Objects.equals(price,
         that.price) && Objects.equals(description, that.description) && Objects.equals(
-        totalAvailable, that.totalAvailable) && Objects.equals(createdAt, that.createdAt)
-        && Objects.equals(updatedAt, that.updatedAt);
+        totalAvailable, that.totalAvailable) && Objects.equals(getCreatedAt(), that.getCreatedAt())
+        && Objects.equals(getUpdatedAt(), that.getUpdatedAt());
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, price, description, totalAvailable, createdAt, updatedAt);
+    return Objects.hash(id, name, price, description, totalAvailable, getCreatedAt(), getUpdatedAt());
   }
 }
