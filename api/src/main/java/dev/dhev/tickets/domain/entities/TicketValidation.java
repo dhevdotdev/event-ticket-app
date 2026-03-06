@@ -26,7 +26,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class TicketValidation extends BaseEntity {
+public class TicketValidation extends Auditable {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)

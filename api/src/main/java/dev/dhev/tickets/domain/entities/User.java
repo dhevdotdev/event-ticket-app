@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseEntity {
+public class User extends Auditable {
 
   @Id
   @Column(name = "id", updatable = false, nullable = false)

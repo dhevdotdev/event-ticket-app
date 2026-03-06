@@ -24,7 +24,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class QrCode extends BaseEntity {
+public class QrCode extends Auditable {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)

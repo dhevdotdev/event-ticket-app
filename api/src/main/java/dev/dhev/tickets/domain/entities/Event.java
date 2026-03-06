@@ -31,7 +31,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Event extends BaseEntity {
+public class Event extends Auditable {
 
   @Id
   @Column(name = "id", updatable = false, nullable = false)

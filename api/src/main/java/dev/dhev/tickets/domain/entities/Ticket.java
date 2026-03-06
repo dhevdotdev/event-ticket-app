@@ -29,7 +29,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Ticket extends BaseEntity {
+public class Ticket extends Auditable {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)
