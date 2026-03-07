@@ -1,0 +1,96 @@
+{
+  "realm": "event-ticket-platform",
+  "enabled": true,
+  "displayName": "Event Ticket Platform",
+  "registrationAllowed": false,
+  "rememberMe": true,
+  "resetPasswordAllowed": true,
+  "roles": {
+    "realm": [
+      {
+        "name": "ROLE_ORGANIZER",
+        "description": "Organizer role"
+      },
+      {
+        "name": "ROLE_ATTENDEE",
+        "description": "Attendee role"
+      },
+      {
+        "name": "ROLE_STAFF",
+        "description": "Staff role"
+      }
+    ]
+  },
+  "clients": [
+    {
+      "clientId": "event-ticket-platform-app",
+      "name": "Event Ticket Platform Web App",
+      "protocol": "openid-connect",
+      "enabled": true,
+      "publicClient": true,
+      "rootUrl": "http://localhost:5173",
+      "baseUrl": "http://localhost:5173",
+      "directAccessGrantsEnabled": true,
+      "standardFlowEnabled": true,
+      "implicitFlowEnabled": false,
+      "serviceAccountsEnabled": false,
+      "redirectUris": [
+        "http://localhost:5173/callback"
+      ],
+      "webOrigins": [
+        "http://localhost:5173"
+      ],
+      "attributes": {
+        "pkce.code.challenge.method": "S256",
+        "post.logout.redirect.uris": "http://localhost:5173"
+      }
+    }
+  ],
+  "users": [
+    {
+      "username": "organizer",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "organizer",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ROLE_ORGANIZER"
+      ]
+    },
+    {
+      "username": "attendee",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "attendee",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ROLE_ATTENDEE"
+      ]
+    },
+    {
+      "username": "staff",
+      "enabled": true,
+      "emailVerified": true,
+      "credentials": [
+        {
+          "type": "password",
+          "value": "staff",
+          "temporary": false
+        }
+      ],
+      "realmRoles": [
+        "ROLE_STAFF"
+      ]
+    }
+  ]
+}
