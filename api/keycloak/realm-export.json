@@ -50,7 +50,11 @@
     {
       "username": "organizer",
       "enabled": true,
+      "firstName": "Organizer",
+      "lastName": "User",
+      "email": "organizer@example.com",
       "emailVerified": true,
+      "requiredActions": [],
       "credentials": [
         {
           "type": "password",
@@ -65,7 +69,11 @@
     {
       "username": "attendee",
       "enabled": true,
+      "firstName": "Attendee",
+      "lastName": "User",
+      "email": "attendee@example.com",
       "emailVerified": true,
+      "requiredActions": [],
       "credentials": [
         {
           "type": "password",
@@ -80,7 +88,11 @@
     {
       "username": "staff",
       "enabled": true,
+      "firstName": "Staff",
+      "lastName": "User",
+      "email": "staff@example.com",
       "emailVerified": true,
+      "requiredActions": [],
       "credentials": [
         {
           "type": "password",
