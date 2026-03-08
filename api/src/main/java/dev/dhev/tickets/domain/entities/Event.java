@@ -1,6 +1,7 @@
 package dev.dhev.tickets.domain.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -70,7 +71,7 @@ public class Event extends Auditable {
   @ManyToMany(mappedBy = "staffingEvents")
   private List<User> staff = new ArrayList<>();
 
-  @OneToMany(mappedBy = "event", orphanRemoval = true)
+  @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<TicketType> ticketTypes = new ArrayList<>();
 
   @Override

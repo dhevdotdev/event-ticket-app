@@ -1,6 +1,7 @@
 package dev.dhev.tickets.domain.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -48,10 +49,10 @@ public class Ticket extends Auditable {
   @JoinColumn(name = "purchaser_id")
   private User purchaser;
 
-  @OneToMany(mappedBy = "ticket", orphanRemoval = true)
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<TicketValidation> validations = new ArrayList<>();
 
-  @OneToMany(mappedBy = "ticket", orphanRemoval = true)
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
   private List<QrCode> qrCodes = new ArrayList<>();
 
   @Override
