@@ -4,7 +4,6 @@ import dev.dhev.tickets.filters.UserProvisioningFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.server.resource.web.authentication.BearerTokenAuthenticationFilter;
@@ -22,11 +21,14 @@ public class SecurityConfig {
         .authorizeHttpRequests(authorize ->
             authorize
                 .requestMatchers(HttpMethod.GET, "/api/v1/published-events/**").permitAll()
-                .requestMatchers("/api/v1/events").hasRole("ORGANIZER")
+                .requestMatchers(HttpMethod.POST, "/api/v1/events/*/ticket-types/*/tickets")
+                .authenticated()
+                .requestMatchers("/api/v1/events/**").hasRole("ORGANIZER")
                 .requestMatchers("/api/v1/ticket-validations").hasRole("STAFF")
                 // Catch all rule
                 .anyRequest().authenticated())
         .csrf(csrf -> csrf.disable())
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .oauth2ResourceServer(oauth2 ->
             oauth2.jwt(jwt ->
                 jwt.jwtAuthenticationConverter(jwtAuthenticationConverter) // <= This here

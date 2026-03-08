@@ -2,6 +2,19 @@
 
 Full-stack event ticketing platform. Spring Boot backend, React frontend.
 
+## Environment
+
+Backend defaults are safe for local dev and can be overridden via env vars:
+- `SPRING_DATASOURCE_URL` (default: `jdbc:postgresql://localhost:5432/postgres`)
+- `SPRING_DATASOURCE_USERNAME` (default: `postgres`)
+- `SPRING_DATASOURCE_PASSWORD` (default: `postgres`)
+- `SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER_URI` (default: `http://localhost:9090/realms/event-ticket-platform`)
+
+Frontend OIDC values can be overridden with Vite env vars:
+- `VITE_OIDC_AUTHORITY` (default: `http://localhost:9090/realms/event-ticket-platform`)
+- `VITE_OIDC_CLIENT_ID` (default: `event-ticket-platform-app`)
+- `VITE_OIDC_REDIRECT_URI` (default: `http://localhost:5173/callback`)
+
 ## Local auth setup (Keycloak)
 
 The frontend uses OIDC and expects this Keycloak config:

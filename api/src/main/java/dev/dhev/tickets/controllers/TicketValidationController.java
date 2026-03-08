@@ -6,6 +6,7 @@ import dev.dhev.tickets.domain.entities.TicketValidation;
 import dev.dhev.tickets.domain.entities.TicketValidationMethod;
 import dev.dhev.tickets.mappers.TicketValidationMapper;
 import dev.dhev.tickets.services.TicketValidationService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,7 +24,7 @@ public class TicketValidationController {
 
   @PostMapping
   public ResponseEntity<TicketValidationResponseDto> validateTicket(
-      @RequestBody TicketValidationRequestDto ticketValidationRequestDto
+      @Valid @RequestBody TicketValidationRequestDto ticketValidationRequestDto
   ){
     TicketValidationMethod method = ticketValidationRequestDto.getMethod();
     TicketValidation ticketValidation;
