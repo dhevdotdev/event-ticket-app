@@ -1,10 +1,12 @@
 import { TicketDetails, TicketStatus } from "@/domain/domain";
 import { getTicket, getTicketQr } from "@/lib/api";
 import { format } from "date-fns";
-import { Calendar, DollarSign, MapPin, Tag } from "lucide-react";
+import { AlertCircle, Calendar, DollarSign, MapPin, Tag } from "lucide-react";
 import { useEffect, useState } from "react";
 import { useAuth } from "react-oidc-context";
 import { useParams } from "react-router";
+import NavBar from "@/components/nav-bar";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
 const DashboardViewTicketPage: React.FC = () => {
   const [ticket, setTicket] = useState<TicketDetails | undefined>();
@@ -61,56 +63,55 @@ const DashboardViewTicketPage: React.FC = () => {
   };
 
   if (!ticket) {
-    return <p>Loading..</p>;
+    return <div className="page-shell page-grid py-10 text-white/70">Loading ticket...</div>;
   }
 
   return (
-    <div className="bg-black min-h-screen text-white flex items-center justify-center p-4">
-      <div className="w-full max-w-md">
-        <div className="relative bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-900 rounded-3xl p-8 shadow-2xl">
-          {/* Status */}
-          <div className="bg-black/30 backdrop-blur-sm px-3 py-1 rounded-full mb-8 text-center">
+    <div className="page-shell min-h-screen pb-16 text-white">
+      <NavBar />
+      <div className="page-grid mt-8 flex items-center justify-center p-4">
+        <div className="glass-panel relative w-full max-w-2xl rounded-[2.2rem] p-6 shadow-2xl sm:p-8">
+          <div className="mb-8 flex justify-center">
+            <div className="rounded-full border border-white/10 bg-white/5 px-4 py-2 text-center">
             <span
-              className={`text-sm font-medium ${getStatusColor(ticket.status)}`}
+                className={`text-sm font-medium uppercase tracking-[0.2em] ${getStatusColor(ticket.status)}`}
             >
               {ticket?.status}
             </span>
           </div>
+          </div>
 
           <div className="mb-2">
-            <h1 className="text-2xl font-bold mb-2">{ticket.eventName}</h1>
-            <div className="flex items-center gap-2 text-purple-200">
+            <h1 className="mb-3 text-center text-5xl leading-none">{ticket.eventName}</h1>
+            <div className="flex items-center justify-center gap-2 text-white/70">
               <MapPin className="w-4" />
               <span>{ticket.eventVenue}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2 text-purple-300 mb-8">
-            <Calendar className="w-4 text-purple-200" />
+          <div className="mb-8 flex items-center justify-center gap-2 text-white/70">
+            <Calendar className="w-4 text-primary" />
             <div>
               {format(ticket.eventStart, "Pp")} -{" "}
               {format(ticket.eventEnd, "Pp")}
             </div>
           </div>
 
-          <div className="flex justify-center mb-8">
-            <div className="bg-white p-4 rounded-2xl shadow-lg">
+          <div className="mb-8 flex justify-center">
+            <div className="rounded-[1.8rem] bg-white p-4 shadow-lg">
               <div className="w-32 h-32 flex items-center justify-center">
-                {/* Loading */}
                 {isQrLoading && (
                   <div className="text-xs text-center p2">
                     <div className="animate-spin rounded-full h-8 w-8 border-b-2 mb-2 mx-auto"></div>
                     <div className="text-gray-800">Loading QR...</div>
                   </div>
                 )}
-                {/* error */}
                 {error && (
-                  <div className="text-red-400 text-sm text-center p-2">
-                    <div className="mb-1">⚠️</div>
-                    {error}
+                  <div className="px-2 text-center text-red-500">
+                    <AlertCircle className="mx-auto mb-1 h-6 w-6" />
+                    <div className="text-sm">QR unavailable</div>
                   </div>
                 )}
-                {/* Display QR */}
                 {qrCodeUrl && !isQrLoading && !error && (
                   <img
                     src={qrCodeUrl}
@@ -122,26 +123,40 @@ const DashboardViewTicketPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="text-center mb-8">
-            <p className="text-purple-200 text-sm">
+          <div className="mb-8 text-center">
+            <p className="text-sm text-white/62">
               Present this QR code at the venue for entry
             </p>
           </div>
 
-          <div className="space-y-2 mb-8">
-            <div className="flex items-center gap-2">
-              <Tag className="w-5 text-purple-200" />
-              <span className="font-semibold">{ticket.description}</span>
+          {error && (
+            <Alert variant="destructive" className="mb-6 border-red-500/35 bg-red-950/30 text-white">
+              <AlertCircle className="h-4 w-4" />
+              <AlertTitle>Error</AlertTitle>
+              <AlertDescription>{error}</AlertDescription>
+            </Alert>
+          )}
+
+          <div className="mb-8 grid gap-4 sm:grid-cols-2">
+            <div className="rounded-[1.35rem] border border-white/10 bg-white/5 p-4">
+              <div className="flex items-center gap-2">
+                <Tag className="w-5 text-primary" />
+                <span className="font-semibold text-white/72">Ticket type</span>
+              </div>
+              <p className="mt-3 text-lg leading-6">{ticket.description}</p>
             </div>
-            <div className="flex items-center gap-2">
-              <DollarSign className="w-5 text-purple-200" />
-              <span className="font-semibold">{ticket.price}</span>
+            <div className="rounded-[1.35rem] border border-white/10 bg-white/5 p-4">
+              <div className="flex items-center gap-2">
+                <DollarSign className="w-5 text-accent" />
+                <span className="font-semibold text-white/72">Price paid</span>
+              </div>
+              <p className="mt-3 text-3xl text-primary">${ticket.price}</p>
             </div>
           </div>
 
-          <div className="text-center mb-2">
-            <h4 className="text-sm font-semibold font-mono">Ticket ID</h4>
-            <p className="text-purple-200 text-sm font-mono">{ticket.id}</p>
+          <div className="text-center">
+            <h4 className="text-sm font-semibold font-mono text-white/65">Ticket ID</h4>
+            <p className="mt-2 text-sm font-mono text-white/55">{ticket.id}</p>
           </div>
         </div>
       </div>

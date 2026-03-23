@@ -146,8 +146,8 @@ const DashboardListEventsPage: React.FC = () => {
 
   if (error) {
     return (
-      <div className="min-h-screen bg-black text-white">
-        <Alert variant="destructive" className="bg-gray-900 border-red-700">
+      <div className="page-shell page-grid py-10 text-white">
+        <Alert variant="destructive" className="glass-panel border-red-500/40 bg-red-950/30">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
@@ -157,83 +157,92 @@ const DashboardListEventsPage: React.FC = () => {
   }
 
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="page-shell pb-16 text-white">
       <NavBar />
 
-      <div className="max-w-lg mx-auto px-4">
-        {/* Title */}
-        <div className="py-8 px-4 flex justify-between">
+      <div className="page-grid mt-8 space-y-8">
+        <div className="glass-panel flex flex-col gap-5 rounded-[2rem] px-6 py-7 sm:flex-row sm:items-end sm:justify-between sm:px-8">
           <div>
-            <h1 className="text-2xl font-bold">Your Events</h1>
-            <p>Events you have created</p>
+            <p className="section-kicker">Organizer dashboard</p>
+            <h1 className="mt-2 text-5xl leading-none">Your events</h1>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/65 sm:text-base">
+              Everything you have drafted, published, and scheduled lives here.
+            </p>
           </div>
-          <div>
+          <div className="shrink-0">
             <Link to="/dashboard/events/create">
-              <Button className="bg-purple-700 hover:bg-purple-500 cursor-pointer">
+              <Button className="h-11 rounded-full px-5 text-primary-foreground cursor-pointer">
                 Create Event
               </Button>
             </Link>
           </div>
         </div>
 
-        {/* Event Cards */}
-        <div className="space-y-2">
+        <div className="space-y-4">
           {events?.content.map((eventItem) => (
-            <Card className="bg-gray-900 border-gray-700 text-white">
+            <Card
+              key={eventItem.id}
+              className="glass-panel rounded-[1.8rem] border-white/10 text-white"
+            >
               <CardHeader>
-                <div className="flex justify-between">
-                  <h3 className="font-bold text-xl">{eventItem.name}</h3>
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.24em] text-primary/80">
+                      Event title
+                    </p>
+                    <h3 className="mt-2 text-4xl leading-none">{eventItem.name}</h3>
+                  </div>
                   <span
-                    className={`flex items-center px-2 py-1 rounded-lg text-xs ${formatStatusBadge(eventItem.status)}`}
+                    className={`flex items-center rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] ${formatStatusBadge(eventItem.status)}`}
                   >
                     {eventItem.status}
                   </span>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
-                {/* Event Start & End */}
-                <div className="flex space-x-2">
-                  <Calendar className="h-5 w-5 text-gray-400" />
+              <CardContent className="grid gap-6 md:grid-cols-2">
+                <div className="flex space-x-3 rounded-[1.3rem] border border-white/10 bg-white/5 p-4">
+                  <Calendar className="mt-1 h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">
+                    <p className="font-medium text-white">Event window</p>
+                    <p className="mt-2 text-white/72">
                       {formatDate(eventItem.start)} to{" "}
                       {formatDate(eventItem.end)}
                     </p>
-                    <p className="text-gray-400">
+                    <p className="text-sm text-white/50">
                       {formatTime(eventItem.start)} -{" "}
                       {formatTime(eventItem.end)}
                     </p>
                   </div>
                 </div>
-                {/* Sales start and end */}
-                <div className="flex space-x-2">
-                  <Clock className="h-5 w-5 text-gray-400" />
+                <div className="flex space-x-3 rounded-[1.3rem] border border-white/10 bg-white/5 p-4">
+                  <Clock className="mt-1 h-5 w-5 text-accent" />
                   <div>
-                    <h4 className="font-medium">Sales Period</h4>
-                    <p className="text-gray-400">
+                    <h4 className="font-medium text-white">Sales period</h4>
+                    <p className="mt-2 text-white/72">
                       {formatDate(eventItem.salesStart)} to{" "}
                       {formatDate(eventItem.salesEnd)}
                     </p>
                   </div>
                 </div>
-                <div className="flex space-x-2">
-                  <MapPin className="h-5 w-5 text-gray-400" />
+                <div className="flex space-x-3 rounded-[1.3rem] border border-white/10 bg-white/5 p-4">
+                  <MapPin className="mt-1 h-5 w-5 text-primary" />
                   <div>
-                    <p className="font-medium">{eventItem.venue}</p>
+                    <p className="font-medium text-white">Venue</p>
+                    <p className="mt-2 text-white/72">{eventItem.venue}</p>
                   </div>
                 </div>
-                <div className="flex items-center space-x-2">
-                  <Tag className="h-5 w-5 text-gray-400" />
+                <div className="flex items-start space-x-3 rounded-[1.3rem] border border-white/10 bg-white/5 p-4">
+                  <Tag className="mt-1 h-5 w-5 text-accent" />
                   <div>
-                    <h4 className="font-medium">Ticket Types</h4>
-                    <ul>
+                    <h4 className="font-medium text-white">Ticket types</h4>
+                    <ul className="mt-2 space-y-2">
                       {eventItem.ticketTypes.map((ticketType) => (
                         <li
                           key={ticketType.id}
-                          className="flex gap-2 text-gray-400"
+                          className="flex flex-wrap gap-2 text-sm text-white/68"
                         >
                           <span>{ticketType.name}</span>
-                          <span>${ticketType.price}</span>
+                          <span className="text-primary">${ticketType.price}</span>
                         </li>
                       ))}
                     </ul>
@@ -244,14 +253,15 @@ const DashboardListEventsPage: React.FC = () => {
                 <Link to={`/dashboard/events/update/${eventItem.id}`}>
                   <Button
                     type="button"
-                    className="bg-gray-700 hover:bg-gray-500 cursor-pointer"
+                    variant="outline"
+                    className="cursor-pointer rounded-full border-white/15 bg-white/5 text-white hover:bg-white/10"
                   >
                     <Edit />
                   </Button>
                 </Link>
                 <Button
                   type="button"
-                  className="bg-red-700/80 hover:bg-red-500 cursor-pointer"
+                  className="cursor-pointer rounded-full bg-red-600/90 hover:bg-red-500"
                   onClick={() => handleOpenDeleteEventDialog(eventItem)}
                 >
                   <Trash />

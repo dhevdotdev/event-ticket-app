@@ -42,68 +42,77 @@ const DashboardListTickets: React.FC = () => {
 
   if (error) {
     return (
-      <div className="bg-black min-h-screen text-white">
+      <div className="page-shell min-h-screen text-white">
         <NavBar />
-        <Alert variant="destructive" className="bg-gray-900 border-red-700">
+        <div className="page-grid py-8">
+          <Alert variant="destructive" className="glass-panel border-red-500/40 bg-red-950/30">
           <AlertCircle className="h-4 w-4" />
           <AlertTitle>Error</AlertTitle>
           <AlertDescription>{error}</AlertDescription>
         </Alert>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="bg-black min-h-screen text-white">
+    <div className="page-shell min-h-screen pb-16 text-white">
       <NavBar />
 
-      {/* Title */}
-      <div className="py-8 px-4">
-        <h1 className="text-2xl font-bold">Your Tickets</h1>
-        <p>Tickets you have purchased</p>
-      </div>
+      <div className="page-grid mt-8 space-y-8">
+        <div className="glass-panel rounded-[2rem] px-6 py-7 sm:px-8">
+          <p className="section-kicker">Attendee vault</p>
+          <h1 className="mt-2 text-5xl leading-none">Your tickets</h1>
+          <p className="mt-3 text-sm leading-6 text-white/65 sm:text-base">
+            Every purchased pass lives here, ready to open and present at the venue.
+          </p>
+        </div>
 
-      <div className="max-w-lg mx-auto">
-        {tickets?.content.map((ticketItem) => (
-          <Link to={`/dashboard/tickets/${ticketItem.id}`}>
-            <Card key={ticketItem.id} className="bg-gray-900 text-white">
-              <CardHeader>
-                <div className="flex justify-between">
-                  <div className="flex items-center gap-2">
-                    <Ticket className="h-5 w-5 text-gray-400" />
-                    <h3 className="font-bold text-xl">
-                      {ticketItem.ticketType.name}
-                    </h3>
+        <div className="grid gap-4 lg:grid-cols-2">
+          {tickets?.content.map((ticketItem) => (
+            <Link to={`/dashboard/tickets/${ticketItem.id}`} key={ticketItem.id}>
+              <Card className="glass-panel rounded-[1.8rem] border-white/10 text-white transition hover:-translate-y-1 hover:border-primary/35">
+                <CardHeader>
+                  <div className="flex justify-between">
+                    <div className="flex items-center gap-2">
+                      <Ticket className="h-5 w-5 text-primary" />
+                      <h3 className="text-3xl leading-none">
+                        {ticketItem.ticketType.name}
+                      </h3>
+                    </div>
+                    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-white/70">
+                      {ticketItem.status}
+                    </span>
                   </div>
-                  <span>{ticketItem.status}</span>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                {/* Price */}
-                <div className="flex items-center gap-2">
-                  <DollarSign className="h-5 w-5 text-gray-400" />
-                  <p className="font-medium">${ticketItem.ticketType.price}</p>
-                </div>
+                </CardHeader>
+                <CardContent className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/5 p-4">
+                    <div className="flex items-center gap-2">
+                      <DollarSign className="h-5 w-5 text-accent" />
+                      <p className="font-medium text-white/72">Price</p>
+                    </div>
+                    <p className="mt-2 text-2xl text-primary">${ticketItem.ticketType.price}</p>
+                  </div>
 
-                {/* Ticket ID */}
-                <div className="flex items-center gap-2">
-                  <Tag className="h-5 w-5 text-gray-400" />
-                  <div>
-                    <h4 className="font-medium">Ticket ID</h4>
-                    <p className="text-gray-400 font-mono text-sm">
-                      {ticketItem.id}
-                    </p>
+                  <div className="rounded-[1.2rem] border border-white/10 bg-white/5 p-4">
+                    <div className="flex items-center gap-2">
+                      <Tag className="h-5 w-5 text-primary" />
+                      <div>
+                        <h4 className="font-medium text-white/72">Ticket ID</h4>
+                        <p className="mt-2 font-mono text-sm text-white/55">
+                          {ticketItem.id}
+                        </p>
+                      </div>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
-          </Link>
-        ))}
-      </div>
-      <div className="flex justify-center py-8">
-        {tickets && (
-          <SimplePagination pagination={tickets} onPageChange={setPage} />
-        )}
+                </CardContent>
+              </Card>
+            </Link>
+          ))}
+        </div>
+        <div className="flex justify-center py-2">
+          {tickets && <SimplePagination pagination={tickets} onPageChange={setPage} />}
+        </div>
       </div>
     </div>
   );

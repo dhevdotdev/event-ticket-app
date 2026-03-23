@@ -6,10 +6,11 @@ import {
   TicketValidationMethod,
   TicketValidationStatus,
 } from "@/domain/domain";
-import { AlertCircle, Check, X } from "lucide-react";
+import { AlertCircle, Check, QrCode, ScanLine, X } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { validateTicket } from "@/lib/api";
 import { useAuth } from "react-oidc-context";
+import NavBar from "@/components/nav-bar";
 
 const DashboardValidateQrPage: React.FC = () => {
   const { isLoading, user } = useAuth();
@@ -53,26 +54,40 @@ const DashboardValidateQrPage: React.FC = () => {
   };
 
   if (isLoading || !user?.access_token) {
-    <p>Loading...</p>;
+    return <div className="page-shell page-grid py-10 text-white/70">Loading validator...</div>;
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex justify-center items-center">
-      <div
-        className="border border-gray-400 max-w-sm
-w-full p-4"
-      >
+    <div className="page-shell min-h-screen pb-16 text-white">
+      <NavBar />
+      <div className="page-grid mt-8 grid gap-6 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+        <div className="glass-panel rounded-[2rem] p-6 sm:p-8">
+          <p className="section-kicker">Staff console</p>
+          <h1 className="mt-3 text-5xl leading-none">Validate entry</h1>
+          <p className="mt-4 text-sm leading-6 text-white/65 sm:text-base">
+            Scan QR codes at the gate or switch to manual entry when the camera is not practical.
+          </p>
+
+          <div className="mt-8 space-y-4 text-sm text-white/65">
+            <div className="rounded-[1.2rem] border border-white/10 bg-white/5 p-4">
+              Valid scan returns a green confirmation.
+            </div>
+            <div className="rounded-[1.2rem] border border-white/10 bg-white/5 p-4">
+              Reused or invalid scans surface a red rejection.
+            </div>
+          </div>
+        </div>
+
+        <div className="glass-panel w-full rounded-[2rem] p-4 sm:p-6">
         {error && (
-          <div className="min-h-screen bg-black text-white">
-            <Alert variant="destructive" className="bg-gray-900 border-red-700">
+            <Alert variant="destructive" className="mb-4 border-red-500/35 bg-red-950/30 text-white">
               <AlertCircle className="h-4 w-4" />
               <AlertTitle>Error</AlertTitle>
               <AlertDescription>{error}</AlertDescription>
             </Alert>
-          </div>
         )}
-        {/* Scanner Viewport */}
-        <div className="rounded-lg overflow-hidden mx-auto mb-8 relative">
+
+        <div className="relative mx-auto mb-8 overflow-hidden rounded-[1.6rem] border border-white/10">
           <Scanner
             key={`scanner-${data}-${validationStatus}`}
             onScan={(result) => {
@@ -86,7 +101,7 @@ w-full p-4"
           />
 
           {validationStatus && (
-            <div className="absolute inset-0 flex items-center justify-center">
+            <div className="absolute inset-0 flex items-center justify-center bg-black/35 backdrop-blur-sm">
               {validationStatus === TicketValidationStatus.VALID ? (
                 <div className="bg-green-500 rounded-full p-4">
                   <Check className="w-20 h-20" />
@@ -101,13 +116,14 @@ w-full p-4"
         </div>
 
         {isManual ? (
-          <div className="pb-8">
+          <div className="pb-4">
             <Input
-              className="w-full text-white text-lg mb-8"
+              className="mb-6 h-12 w-full text-lg text-white"
+              placeholder="Paste ticket ID"
               onChange={(e) => setData(e.target.value)}
             />
             <Button
-              className="bg-purple-500 w-full h-[80px] hover:bg-purple-800"
+              className="h-14 w-full rounded-[1rem] text-base text-primary-foreground"
               onClick={() =>
                 handleValidate(data || "", TicketValidationMethod.MANUAL)
               }
@@ -117,24 +133,29 @@ w-full p-4"
           </div>
         ) : (
           <div>
-            <div className="border-white border-2 h-12 rounded-md font-mono flex justify-center items-center">
+            <div className="flex h-14 items-center justify-center rounded-[1rem] border border-white/10 bg-white/5 font-mono text-sm text-white/70">
               <span>{data || "Scan for Result"}</span>
             </div>
             <Button
-              className="bg-gray-900 hover:bg-gray-600 border-gray-500 border-2 w-full h-[80px] text-xl my-8"
+              variant="outline"
+              className="my-6 h-14 w-full rounded-[1rem] border-white/10 bg-white/5 text-base text-white hover:bg-white/10"
               onClick={() => setIsManual(true)}
             >
+              <QrCode className="h-4 w-4" />
               Manual
             </Button>
           </div>
         )}
 
         <Button
-          className="bg-gray-500 hover:bg-gray-800 w-full h-[80px] text-xl my-8"
+          variant="ghost"
+          className="my-4 h-14 w-full rounded-[1rem] text-base text-white/75 hover:bg-white/10 hover:text-white"
           onClick={handleReset}
         >
+          <ScanLine className="h-4 w-4" />
           Reset
         </Button>
+        </div>
       </div>
     </div>
   );
