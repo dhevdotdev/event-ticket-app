@@ -176,30 +176,3 @@ if (!userRepository.existsById(keycloakId)) {
 ```
 
 This is why `User.id` has no `@GeneratedValue` — the ID is the Keycloak subject UUID, not a DB-generated one. The two systems stay in sync by design.
-
----
-
-## The Callback Page Bug (and Fix)
-
-The original callback page had no fallback when `redirectPath` was missing from localStorage:
-
-```ts
-// before — if redirectPath is null, nothing happens, user stuck forever
-const redirectPath = localStorage.getItem("redirectPath");
-if (redirectPath) {
-  localStorage.removeItem("redirectPath");
-  navigate(redirectPath);
-}
-
-// after — always navigate somewhere
-const redirectPath = localStorage.getItem("redirectPath") ?? "/dashboard";
-localStorage.removeItem("redirectPath");
-navigate(redirectPath);
-```
-
-`redirectPath` can be missing when:
-- The user navigates directly to `/callback` manually
-- localStorage was cleared between the redirect and the return
-- The tab was refreshed mid-flow
-
-The fix: default to `/dashboard` if nothing is stored.
