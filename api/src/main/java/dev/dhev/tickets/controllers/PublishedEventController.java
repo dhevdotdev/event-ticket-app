@@ -1,7 +1,7 @@
 package dev.dhev.tickets.controllers;
 
-import dev.dhev.tickets.domain.dtos.GetPublishedEventDetailsResponseDto;
-import dev.dhev.tickets.domain.dtos.ListPublishedEventResponseDto;
+import dev.dhev.tickets.api.responses.PublishedEventDetailsResponse;
+import dev.dhev.tickets.api.responses.PublishedEventSummaryResponse;
 import dev.dhev.tickets.domain.entities.Event;
 import dev.dhev.tickets.mappers.EventMapper;
 import dev.dhev.tickets.services.EventService;
@@ -25,7 +25,7 @@ public class PublishedEventController {
   private final EventMapper eventMapper;
 
   @GetMapping
-  public ResponseEntity<Page<ListPublishedEventResponseDto>> listPublishedEvents(
+  public ResponseEntity<Page<PublishedEventSummaryResponse>> listPublishedEvents(
       @RequestParam(required = false) String q,
       Pageable pageable) {
 
@@ -37,16 +37,16 @@ public class PublishedEventController {
     }
 
     return ResponseEntity.ok(
-        events.map(eventMapper::toListPublishedEventResponseDto)
+        events.map(eventMapper::toPublishedEventSummaryResponse)
     );
   }
 
   @GetMapping(path = "/{eventId}")
-  public ResponseEntity<GetPublishedEventDetailsResponseDto> getPublishedEventDetails(
+  public ResponseEntity<PublishedEventDetailsResponse> getPublishedEventDetails(
       @PathVariable UUID eventId
   ) {
     return eventService.getPublishedEvent(eventId)
-        .map(eventMapper::toGetPublishedEventDetailsResponseDto)
+        .map(eventMapper::toPublishedEventDetailsResponse)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }

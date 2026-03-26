@@ -1,8 +1,8 @@
 package dev.dhev.tickets.mappers;
 
-import dev.dhev.tickets.domain.dtos.GetTicketResponseDto;
-import dev.dhev.tickets.domain.dtos.ListTicketResponseDto;
-import dev.dhev.tickets.domain.dtos.ListTicketTicketTypeResponseDto;
+import dev.dhev.tickets.api.responses.TicketDetailsResponse;
+import dev.dhev.tickets.api.responses.TicketSummaryResponse;
+import dev.dhev.tickets.api.responses.TicketSummaryTicketTypeResponse;
 import dev.dhev.tickets.domain.entities.Ticket;
 import dev.dhev.tickets.domain.entities.TicketType;
 import org.mapstruct.Mapper;
@@ -12,9 +12,9 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface TicketMapper {
 
-  ListTicketTicketTypeResponseDto toListTicketTicketTypeResponseDto(TicketType ticketType);
+  TicketSummaryTicketTypeResponse toTicketSummaryTicketTypeResponse(TicketType ticketType);
 
-  ListTicketResponseDto toListTicketResponseDto(Ticket ticket);
+  TicketSummaryResponse toTicketSummaryResponse(Ticket ticket);
 
   @Mapping(target = "price", source = "ticket.ticketType.price")
   @Mapping(target = "description", source = "ticket.ticketType.description")
@@ -22,6 +22,6 @@ public interface TicketMapper {
   @Mapping(target = "eventVenue", source = "ticket.ticketType.event.venue")
   @Mapping(target = "eventStart", source = "ticket.ticketType.event.start")
   @Mapping(target = "eventEnd", source = "ticket.ticketType.event.end")
-  GetTicketResponseDto toGetTicketResponseDto(Ticket ticket);
+  TicketDetailsResponse toTicketDetailsResponse(Ticket ticket);
 
 }

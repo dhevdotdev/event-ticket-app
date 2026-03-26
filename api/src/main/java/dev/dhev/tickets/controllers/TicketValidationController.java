@@ -1,7 +1,7 @@
 package dev.dhev.tickets.controllers;
 
-import dev.dhev.tickets.domain.dtos.TicketValidationRequestDto;
-import dev.dhev.tickets.domain.dtos.TicketValidationResponseDto;
+import dev.dhev.tickets.api.requests.TicketValidationRequest;
+import dev.dhev.tickets.api.responses.TicketValidationResponse;
 import dev.dhev.tickets.domain.entities.TicketValidation;
 import dev.dhev.tickets.domain.entities.TicketValidationMethod;
 import dev.dhev.tickets.mappers.TicketValidationMapper;
@@ -23,21 +23,21 @@ public class TicketValidationController {
   private final TicketValidationMapper ticketValidationMapper;
 
   @PostMapping
-  public ResponseEntity<TicketValidationResponseDto> validateTicket(
-      @Valid @RequestBody TicketValidationRequestDto ticketValidationRequestDto
-  ){
-    TicketValidationMethod method = ticketValidationRequestDto.getMethod();
+  public ResponseEntity<TicketValidationResponse> validateTicket(
+      @Valid @RequestBody TicketValidationRequest request
+   ){
+    TicketValidationMethod method = request.getMethod();
     TicketValidation ticketValidation;
     if(TicketValidationMethod.MANUAL.equals(method)) {
       ticketValidation = ticketValidationService.validateTicketManually(
-          ticketValidationRequestDto.getId());
+          request.getId());
     } else {
       ticketValidation = ticketValidationService.validateTicketByQrCode(
-          ticketValidationRequestDto.getId()
+          request.getId()
       );
     }
     return ResponseEntity.ok(
-        ticketValidationMapper.toTicketValidationResponseDto(ticketValidation)
+        ticketValidationMapper.toTicketValidationResponse(ticketValidation)
     );
   }
 

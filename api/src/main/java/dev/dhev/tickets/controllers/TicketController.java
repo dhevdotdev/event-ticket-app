@@ -2,8 +2,8 @@ package dev.dhev.tickets.controllers;
 
 import static dev.dhev.tickets.util.JwtUtil.parseUserId;
 
-import dev.dhev.tickets.domain.dtos.GetTicketResponseDto;
-import dev.dhev.tickets.domain.dtos.ListTicketResponseDto;
+import dev.dhev.tickets.api.responses.TicketDetailsResponse;
+import dev.dhev.tickets.api.responses.TicketSummaryResponse;
 import dev.dhev.tickets.mappers.TicketMapper;
 import dev.dhev.tickets.services.QrCodeService;
 import dev.dhev.tickets.services.TicketService;
@@ -33,24 +33,24 @@ public class TicketController {
   private final QrCodeService qrCodeService;
 
   @GetMapping
-  public Page<ListTicketResponseDto> listTickets(
+  public Page<TicketSummaryResponse> listTickets(
       @AuthenticationPrincipal Jwt jwt,
       Pageable pageable
   ) {
     return ticketService.listTicketsForUser(
         parseUserId(jwt),
         pageable
-    ).map(ticketMapper::toListTicketResponseDto);
+    ).map(ticketMapper::toTicketSummaryResponse);
   }
 
   @GetMapping(path = "/{ticketId}")
-  public ResponseEntity<GetTicketResponseDto> getTicket(
+  public ResponseEntity<TicketDetailsResponse> getTicket(
       @AuthenticationPrincipal Jwt jwt,
       @PathVariable UUID ticketId
   ) {
     return ticketService
         .getTicketForUser(parseUserId(jwt), ticketId)
-        .map(ticketMapper::toGetTicketResponseDto)
+        .map(ticketMapper::toTicketDetailsResponse)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }

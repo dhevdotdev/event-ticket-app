@@ -1,23 +1,23 @@
 package dev.dhev.tickets.mappers;
 
-import dev.dhev.tickets.domain.CreateEventRequest;
-import dev.dhev.tickets.domain.CreateTicketTypeRequest;
-import dev.dhev.tickets.domain.UpdateEventRequest;
-import dev.dhev.tickets.domain.UpdateTicketTypeRequest;
-import dev.dhev.tickets.domain.dtos.CreateEventRequestDto;
-import dev.dhev.tickets.domain.dtos.CreateEventResponseDto;
-import dev.dhev.tickets.domain.dtos.CreateTicketTypeRequestDto;
-import dev.dhev.tickets.domain.dtos.GetEventDetailsResponseDto;
-import dev.dhev.tickets.domain.dtos.GetEventDetailsTicketTypesResponseDto;
-import dev.dhev.tickets.domain.dtos.GetPublishedEventDetailsResponseDto;
-import dev.dhev.tickets.domain.dtos.GetPublishedEventDetailsTicketTypesResponseDto;
-import dev.dhev.tickets.domain.dtos.ListEventResponseDto;
-import dev.dhev.tickets.domain.dtos.ListEventTicketTypeResponseDto;
-import dev.dhev.tickets.domain.dtos.ListPublishedEventResponseDto;
-import dev.dhev.tickets.domain.dtos.UpdateEventRequestDto;
-import dev.dhev.tickets.domain.dtos.UpdateEventResponseDto;
-import dev.dhev.tickets.domain.dtos.UpdateTicketTypeRequestDto;
-import dev.dhev.tickets.domain.dtos.UpdateTicketTypeResponseDto;
+import dev.dhev.tickets.application.command.CreateEventCommand;
+import dev.dhev.tickets.application.command.CreateTicketTypeCommand;
+import dev.dhev.tickets.application.command.UpdateEventCommand;
+import dev.dhev.tickets.application.command.UpdateTicketTypeCommand;
+import dev.dhev.tickets.api.requests.CreateEventRequest;
+import dev.dhev.tickets.api.requests.CreateTicketTypeRequest;
+import dev.dhev.tickets.api.requests.UpdateEventRequest;
+import dev.dhev.tickets.api.requests.UpdateTicketTypeRequest;
+import dev.dhev.tickets.api.responses.CreateEventResponse;
+import dev.dhev.tickets.api.responses.EventDetailsResponse;
+import dev.dhev.tickets.api.responses.EventDetailsTicketTypeResponse;
+import dev.dhev.tickets.api.responses.PublishedEventDetailsResponse;
+import dev.dhev.tickets.api.responses.PublishedEventTicketTypeResponse;
+import dev.dhev.tickets.api.responses.EventSummaryResponse;
+import dev.dhev.tickets.api.responses.EventSummaryTicketTypeResponse;
+import dev.dhev.tickets.api.responses.PublishedEventSummaryResponse;
+import dev.dhev.tickets.api.responses.UpdateEventResponse;
+import dev.dhev.tickets.api.responses.UpdateTicketTypeResponse;
 import dev.dhev.tickets.domain.entities.Event;
 import dev.dhev.tickets.domain.entities.TicketType;
 import org.mapstruct.Mapper;
@@ -26,33 +26,33 @@ import org.mapstruct.ReportingPolicy;
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface EventMapper {
 
-  CreateTicketTypeRequest fromDto(CreateTicketTypeRequestDto dto);
+  CreateTicketTypeCommand toCommand(CreateTicketTypeRequest request);
 
-  CreateEventRequest fromDto(CreateEventRequestDto dto);
+  CreateEventCommand toCommand(CreateEventRequest request);
 
-  CreateEventResponseDto toDto(Event event);
+  CreateEventResponse toCreateEventResponse(Event event);
 
-  ListEventTicketTypeResponseDto toDto(TicketType ticketType);
+  EventSummaryTicketTypeResponse toEventSummaryTicketTypeResponse(TicketType ticketType);
 
-  ListEventResponseDto toListEventResponseDto(Event event);
+  EventSummaryResponse toEventSummaryResponse(Event event);
 
-  GetEventDetailsTicketTypesResponseDto toGetEventDetailsTicketTypesResponseDto(
+  EventDetailsTicketTypeResponse toEventDetailsTicketTypeResponse(
       TicketType ticketType);
 
-  GetEventDetailsResponseDto toGetEventDetailsResponseDto(Event event);
+  EventDetailsResponse toEventDetailsResponse(Event event);
 
-  UpdateTicketTypeRequest fromDto(UpdateTicketTypeRequestDto dto);
+  UpdateTicketTypeCommand toCommand(UpdateTicketTypeRequest request);
 
-  UpdateEventRequest fromDto(UpdateEventRequestDto dto);
+  UpdateEventCommand toCommand(UpdateEventRequest request);
 
-  UpdateTicketTypeResponseDto toUpdateTicketTypeResponseDto(TicketType ticketType);
+  UpdateTicketTypeResponse toUpdateTicketTypeResponse(TicketType ticketType);
 
-  UpdateEventResponseDto toUpdateEventResponseDto(Event event);
+  UpdateEventResponse toUpdateEventResponse(Event event);
 
-  ListPublishedEventResponseDto toListPublishedEventResponseDto(Event event);
+  PublishedEventSummaryResponse toPublishedEventSummaryResponse(Event event);
 
-  GetPublishedEventDetailsTicketTypesResponseDto toGetPublishedEventDetailsTicketTypesResponseDto(
+  PublishedEventTicketTypeResponse toPublishedEventTicketTypeResponse(
       TicketType ticketType);
 
-  GetPublishedEventDetailsResponseDto toGetPublishedEventDetailsResponseDto(Event event);
+  PublishedEventDetailsResponse toPublishedEventDetailsResponse(Event event);
 }

@@ -1,7 +1,7 @@
 package dev.dhev.tickets.services;
 
-import dev.dhev.tickets.domain.CreateEventRequest;
-import dev.dhev.tickets.domain.UpdateEventRequest;
+import dev.dhev.tickets.application.command.CreateEventCommand;
+import dev.dhev.tickets.application.command.UpdateEventCommand;
 import dev.dhev.tickets.domain.entities.Event;
 import java.util.Optional;
 import java.util.UUID;
@@ -10,13 +10,13 @@ import org.springframework.data.domain.Pageable;
 
 public interface EventService {
 
-  Event createEvent(UUID organizerId, CreateEventRequest event);
+  Event createEvent(UUID organizerId, CreateEventCommand event);
 
   Page<Event> listEventsForOrganizer(UUID organizerId, Pageable pageable);
 
   Optional<Event> getEventForOrganizer(UUID organizerId, UUID id);
 
-  Event updateEventForOrganizer(UUID organizerId, UUID id, UpdateEventRequest event);
+  Event updateEventForOrganizer(UUID organizerId, UUID id, UpdateEventCommand event);
 
   void deleteEventForOrganizer(UUID organizerId, UUID id);
 

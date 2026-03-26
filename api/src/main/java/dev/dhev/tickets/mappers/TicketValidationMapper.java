@@ -1,6 +1,6 @@
 package dev.dhev.tickets.mappers;
 
-import dev.dhev.tickets.domain.dtos.TicketValidationResponseDto;
+import dev.dhev.tickets.api.responses.TicketValidationResponse;
 import dev.dhev.tickets.domain.entities.TicketValidation;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,6 +10,6 @@ import org.mapstruct.ReportingPolicy;
 public interface TicketValidationMapper {
 
   @Mapping(target = "ticketId", source = "ticket.id")
-  TicketValidationResponseDto toTicketValidationResponseDto(TicketValidation ticketValidation);
+  TicketValidationResponse toTicketValidationResponse(TicketValidation ticketValidation);
 
 }

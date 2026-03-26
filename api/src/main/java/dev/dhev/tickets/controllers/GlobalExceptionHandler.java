@@ -1,6 +1,6 @@
 package dev.dhev.tickets.controllers;
 
-import dev.dhev.tickets.domain.dtos.ErrorDto;
+import dev.dhev.tickets.api.responses.ApiError;
 import dev.dhev.tickets.exceptions.EventNotFoundException;
 import dev.dhev.tickets.exceptions.EventUpdateException;
 import dev.dhev.tickets.exceptions.QrCodeGenerationException;
@@ -26,77 +26,77 @@ public class GlobalExceptionHandler {
 
 
   @ExceptionHandler(TicketNotFoundException.class)
-  public ResponseEntity<ErrorDto> handleTicketNotFoundException(TicketNotFoundException ex) {
+  public ResponseEntity<ApiError> handleTicketNotFoundException(TicketNotFoundException ex) {
     log.error("Caught TicketNotFoundException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Ticket not found");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
 
   @ExceptionHandler(TicketsSoldOutException.class)
-  public ResponseEntity<ErrorDto> handleTicketsSoldOutException(TicketsSoldOutException ex) {
+  public ResponseEntity<ApiError> handleTicketsSoldOutException(TicketsSoldOutException ex) {
     log.error("Caught TicketsSoldOutException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Tickets are sold out for this ticket type");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(QrCodeNotFoundException.class)
-  public ResponseEntity<ErrorDto> handleQrCodeNotFoundException(QrCodeNotFoundException ex) {
+  public ResponseEntity<ApiError> handleQrCodeNotFoundException(QrCodeNotFoundException ex) {
     log.error("Caught QrCodeNotFoundException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("QR code not found");
     return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(QrCodeGenerationException.class)
-  public ResponseEntity<ErrorDto> handleQrCodeGenerationException(QrCodeGenerationException ex) {
+  public ResponseEntity<ApiError> handleQrCodeGenerationException(QrCodeGenerationException ex) {
     log.error("Caught QrCodeGenerationException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Unable to generate QR Code");
     return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
   }
 
   @ExceptionHandler(EventUpdateException.class)
-  public ResponseEntity<ErrorDto> handleEventUpdateException(EventUpdateException ex) {
+  public ResponseEntity<ApiError> handleEventUpdateException(EventUpdateException ex) {
     log.error("Caught EventUpdateException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Unable to update event");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(TicketTypeNotFoundException.class)
-  public ResponseEntity<ErrorDto> handleTicketTypeNotFoundException(
+  public ResponseEntity<ApiError> handleTicketTypeNotFoundException(
       TicketTypeNotFoundException ex) {
     log.error("Caught TicketTypeNotFoundException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Ticket type not found");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(EventNotFoundException.class)
-  public ResponseEntity<ErrorDto> handleEventNotFoundException(EventNotFoundException ex) {
+  public ResponseEntity<ApiError> handleEventNotFoundException(EventNotFoundException ex) {
     log.error("Caught EventNotFoundException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("Event not found");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(UserNotFoundException.class)
-  public ResponseEntity<ErrorDto> handleUserNotFoundException(UserNotFoundException ex) {
+  public ResponseEntity<ApiError> handleUserNotFoundException(UserNotFoundException ex) {
     log.error("Caught UserNotFoundException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("User not found");
     return new ResponseEntity<>(errorDto, HttpStatus.BAD_REQUEST);
   }
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<ErrorDto> handleMethodArgumentNotValidException(
+  public ResponseEntity<ApiError> handleMethodArgumentNotValidException(
       MethodArgumentNotValidException ex
   ) {
     log.error("Caught MethodArgumentNotValidException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
 
     BindingResult bindingResult = ex.getBindingResult();
     List<FieldError> fieldErrors = bindingResult.getFieldErrors();
@@ -110,11 +110,11 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(ConstraintViolationException.class)
-  public ResponseEntity<ErrorDto> handleConstraintViolation(
+  public ResponseEntity<ApiError> handleConstraintViolation(
       ConstraintViolationException ex
   ) {
     log.error("Caught ConstraintViolationException", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
 
     String errorMessage = ex.getConstraintViolations()
         .stream()
@@ -128,9 +128,9 @@ public class GlobalExceptionHandler {
   }
 
   @ExceptionHandler(Exception.class)
-  public ResponseEntity<ErrorDto> handleException(Exception ex) {
+  public ResponseEntity<ApiError> handleException(Exception ex) {
     log.error("Caught exception", ex);
-    ErrorDto errorDto = new ErrorDto();
+    ApiError errorDto = new ApiError();
     errorDto.setError("An unknown error occurred");
     return new ResponseEntity<>(errorDto, HttpStatus.INTERNAL_SERVER_ERROR);
   }
