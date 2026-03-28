@@ -1,6 +1,6 @@
 package dev.dhev.tickets.filters;
 
-import dev.dhev.tickets.domain.entities.User;
+import dev.dhev.tickets.entities.User;
 import dev.dhev.tickets.repositories.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

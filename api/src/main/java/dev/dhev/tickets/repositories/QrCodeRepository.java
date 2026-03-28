@@ -1,7 +1,7 @@
 package dev.dhev.tickets.repositories;
 
-import dev.dhev.tickets.domain.entities.QrCode;
-import dev.dhev.tickets.domain.entities.QrCodeStatus;
+import dev.dhev.tickets.entities.QrCode;
+import dev.dhev.tickets.entities.QrCodeStatus;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;

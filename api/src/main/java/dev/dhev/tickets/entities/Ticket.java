@@ -1,6 +1,7 @@
-package dev.dhev.tickets.domain.entities;
+package dev.dhev.tickets.entities;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -10,7 +11,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -20,13 +24,13 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "ticket_validations")
+@Table(name = "tickets")
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
-public class TicketValidation extends Auditable {
+public class Ticket extends Auditable {
 
   @Id
   @Column(name = "id", nullable = false, updatable = false)
@@ -35,24 +39,30 @@ public class TicketValidation extends Auditable {
 
   @Column(name = "status", nullable = false)
   @Enumerated(EnumType.STRING)
-  private TicketValidationStatus status;
-
-  @Column(name = "validation_method", nullable = false)
-  @Enumerated(EnumType.STRING)
-  private TicketValidationMethod validationMethod;
+  private TicketStatus status;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "ticket_id")
-  private Ticket ticket;
+  @JoinColumn(name = "ticket_type_id")
+  private TicketType ticketType;
+
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "purchaser_id")
+  private User purchaser;
+
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<TicketValidation> validations = new ArrayList<>();
+
+  @OneToMany(mappedBy = "ticket", cascade = CascadeType.ALL, orphanRemoval = true)
+  private List<QrCode> qrCodes = new ArrayList<>();
 
   @Override
   public boolean equals(Object o) {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    TicketValidation that = (TicketValidation) o;
-    return Objects.equals(id, that.id) && status == that.status && Objects.equals(getCreatedAt(),
-        that.getCreatedAt()) && Objects.equals(getUpdatedAt(), that.getUpdatedAt());
+    Ticket ticket = (Ticket) o;
+    return Objects.equals(id, ticket.id) && status == ticket.status && Objects.equals(getCreatedAt(),
+        ticket.getCreatedAt()) && Objects.equals(getUpdatedAt(), ticket.getUpdatedAt());
   }
 
   @Override

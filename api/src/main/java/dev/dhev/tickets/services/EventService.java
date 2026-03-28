@@ -2,7 +2,7 @@ package dev.dhev.tickets.services;
 
 import dev.dhev.tickets.application.command.CreateEventCommand;
 import dev.dhev.tickets.application.command.UpdateEventCommand;
-import dev.dhev.tickets.domain.entities.Event;
+import dev.dhev.tickets.entities.Event;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.domain.Page;

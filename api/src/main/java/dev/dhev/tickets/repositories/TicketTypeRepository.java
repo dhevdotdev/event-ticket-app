@@ -1,6 +1,6 @@
 package dev.dhev.tickets.repositories;
 
-import dev.dhev.tickets.domain.entities.TicketType;
+import dev.dhev.tickets.entities.TicketType;
 import jakarta.persistence.LockModeType;
 import java.util.Optional;
 import java.util.UUID;

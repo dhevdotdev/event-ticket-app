@@ -10,7 +10,7 @@ import dev.dhev.tickets.api.responses.CreateEventResponse;
 import dev.dhev.tickets.api.responses.EventDetailsResponse;
 import dev.dhev.tickets.api.responses.EventSummaryResponse;
 import dev.dhev.tickets.api.responses.UpdateEventResponse;
-import dev.dhev.tickets.domain.entities.Event;
+import dev.dhev.tickets.entities.Event;
 import dev.dhev.tickets.mappers.EventMapper;
 import dev.dhev.tickets.services.EventService;
 import jakarta.validation.Valid;

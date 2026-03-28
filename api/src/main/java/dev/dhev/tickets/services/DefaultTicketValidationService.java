@@ -1,11 +1,11 @@
 package dev.dhev.tickets.services;
 
-import dev.dhev.tickets.domain.entities.QrCode;
-import dev.dhev.tickets.domain.entities.QrCodeStatus;
-import dev.dhev.tickets.domain.entities.Ticket;
-import dev.dhev.tickets.domain.entities.TicketValidation;
-import dev.dhev.tickets.domain.entities.TicketValidationMethod;
-import dev.dhev.tickets.domain.entities.TicketValidationStatus;
+import dev.dhev.tickets.entities.QrCode;
+import dev.dhev.tickets.entities.QrCodeStatus;
+import dev.dhev.tickets.entities.Ticket;
+import dev.dhev.tickets.entities.TicketValidation;
+import dev.dhev.tickets.entities.TicketValidationMethod;
+import dev.dhev.tickets.entities.TicketValidationStatus;
 import dev.dhev.tickets.exceptions.QrCodeNotFoundException;
 import dev.dhev.tickets.exceptions.TicketNotFoundException;
 import dev.dhev.tickets.repositories.QrCodeRepository;

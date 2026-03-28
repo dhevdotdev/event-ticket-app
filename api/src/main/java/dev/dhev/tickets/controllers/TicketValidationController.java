@@ -2,8 +2,8 @@ package dev.dhev.tickets.controllers;
 
 import dev.dhev.tickets.api.requests.TicketValidationRequest;
 import dev.dhev.tickets.api.responses.TicketValidationResponse;
-import dev.dhev.tickets.domain.entities.TicketValidation;
-import dev.dhev.tickets.domain.entities.TicketValidationMethod;
+import dev.dhev.tickets.entities.TicketValidation;
+import dev.dhev.tickets.entities.TicketValidationMethod;
 import dev.dhev.tickets.mappers.TicketValidationMapper;
 import dev.dhev.tickets.services.TicketValidationService;
 import jakarta.validation.Valid;

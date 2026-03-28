@@ -18,8 +18,8 @@ import dev.dhev.tickets.api.responses.EventSummaryTicketTypeResponse;
 import dev.dhev.tickets.api.responses.PublishedEventSummaryResponse;
 import dev.dhev.tickets.api.responses.UpdateEventResponse;
 import dev.dhev.tickets.api.responses.UpdateTicketTypeResponse;
-import dev.dhev.tickets.domain.entities.Event;
-import dev.dhev.tickets.domain.entities.TicketType;
+import dev.dhev.tickets.entities.Event;
+import dev.dhev.tickets.entities.TicketType;
 import org.mapstruct.Mapper;
 import org.mapstruct.ReportingPolicy;
 

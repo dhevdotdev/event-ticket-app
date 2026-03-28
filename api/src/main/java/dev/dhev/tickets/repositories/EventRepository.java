@@ -1,7 +1,7 @@
 package dev.dhev.tickets.repositories;
 
-import dev.dhev.tickets.domain.entities.Event;
-import dev.dhev.tickets.domain.entities.EventStatus;
+import dev.dhev.tickets.entities.Event;
+import dev.dhev.tickets.entities.EventStatus;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.domain.Page;

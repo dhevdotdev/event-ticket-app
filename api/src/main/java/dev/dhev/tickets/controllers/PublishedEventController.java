@@ -2,7 +2,7 @@ package dev.dhev.tickets.controllers;
 
 import dev.dhev.tickets.api.responses.PublishedEventDetailsResponse;
 import dev.dhev.tickets.api.responses.PublishedEventSummaryResponse;
-import dev.dhev.tickets.domain.entities.Event;
+import dev.dhev.tickets.entities.Event;
 import dev.dhev.tickets.mappers.EventMapper;
 import dev.dhev.tickets.services.EventService;
 import java.util.UUID;

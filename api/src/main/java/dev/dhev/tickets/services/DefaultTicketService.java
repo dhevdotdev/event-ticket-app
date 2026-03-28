@@ -1,6 +1,6 @@
 package dev.dhev.tickets.services;
 
-import dev.dhev.tickets.domain.entities.Ticket;
+import dev.dhev.tickets.entities.Ticket;
 import dev.dhev.tickets.repositories.TicketRepository;
 import java.util.Optional;
 import java.util.UUID;

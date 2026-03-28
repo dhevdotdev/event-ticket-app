@@ -1,6 +1,6 @@
 package dev.dhev.tickets.api.requests;
 
-import dev.dhev.tickets.domain.entities.EventStatus;
+import dev.dhev.tickets.entities.EventStatus;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;

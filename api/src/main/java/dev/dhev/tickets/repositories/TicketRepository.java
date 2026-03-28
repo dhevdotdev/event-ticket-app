@@ -1,6 +1,6 @@
 package dev.dhev.tickets.repositories;
 
-import dev.dhev.tickets.domain.entities.Ticket;
+import dev.dhev.tickets.entities.Ticket;
 import java.util.Optional;
 import java.util.UUID;
 import org.springframework.data.domain.Page;

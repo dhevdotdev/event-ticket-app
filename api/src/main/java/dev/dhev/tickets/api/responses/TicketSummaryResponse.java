@@ -1,6 +1,6 @@
 package dev.dhev.tickets.api.responses;
 
-import dev.dhev.tickets.domain.entities.TicketStatus;
+import dev.dhev.tickets.entities.TicketStatus;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.Data;

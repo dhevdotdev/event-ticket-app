@@ -1,9 +1,9 @@
 package dev.dhev.tickets.services;
 
-import dev.dhev.tickets.domain.entities.Ticket;
-import dev.dhev.tickets.domain.entities.TicketStatus;
-import dev.dhev.tickets.domain.entities.TicketType;
-import dev.dhev.tickets.domain.entities.User;
+import dev.dhev.tickets.entities.Ticket;
+import dev.dhev.tickets.entities.TicketStatus;
+import dev.dhev.tickets.entities.TicketType;
+import dev.dhev.tickets.entities.User;
 import dev.dhev.tickets.exceptions.TicketTypeNotFoundException;
 import dev.dhev.tickets.exceptions.TicketsSoldOutException;
 import dev.dhev.tickets.exceptions.UserNotFoundException;

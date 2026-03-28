@@ -1,4 +1,4 @@
-package dev.dhev.tickets.domain.entities;
+package dev.dhev.tickets.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -1,6 +1,6 @@
 package dev.dhev.tickets.api.responses;
 
-import dev.dhev.tickets.domain.entities.EventStatus;
+import dev.dhev.tickets.entities.EventStatus;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;

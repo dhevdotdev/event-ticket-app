@@ -1,4 +1,4 @@
-package dev.dhev.tickets.domain.entities;
+package dev.dhev.tickets.entities;
 
 public enum QrCodeStatus {
   ACTIVE, EXPIRED

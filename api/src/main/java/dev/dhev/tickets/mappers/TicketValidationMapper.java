@@ -1,7 +1,7 @@
 package dev.dhev.tickets.mappers;
 
 import dev.dhev.tickets.api.responses.TicketValidationResponse;
-import dev.dhev.tickets.domain.entities.TicketValidation;
+import dev.dhev.tickets.entities.TicketValidation;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.ReportingPolicy;
