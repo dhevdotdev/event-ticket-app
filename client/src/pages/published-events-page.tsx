@@ -14,6 +14,15 @@ import { Link, useParams } from "react-router";
 import PublicHeader from "@/components/public-header";
 import { format } from "date-fns";
 
+const parseApiDate = (value?: Date | string): Date | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  const parsed = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+};
+
 const PublishedEventsPage: React.FC = () => {
   const { isLoading } = useAuth();
   const { id } = useParams();
@@ -68,8 +77,8 @@ const PublishedEventsPage: React.FC = () => {
   }
 
   const eventDateLabel =
-    publishedEvent?.start && publishedEvent?.end
-      ? `${format(publishedEvent.start, "EEEE, MMM d")} - ${format(publishedEvent.end, "MMM d")}`
+    parseApiDate(publishedEvent?.start) && parseApiDate(publishedEvent?.end)
+      ? `${format(parseApiDate(publishedEvent?.start)!, "EEEE, MMM d")} - ${format(parseApiDate(publishedEvent?.end)!, "MMM d")}`
       : "Dates to be announced";
 
   return (

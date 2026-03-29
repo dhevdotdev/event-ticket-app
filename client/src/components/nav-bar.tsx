@@ -14,7 +14,7 @@ import { Link } from "react-router";
 
 const NavBar: React.FC = () => {
   const { user, signoutRedirect } = useAuth();
-  const { isOrganizer } = useRoles();
+  const { isAttendee, isOrganizer, isStaff } = useRoles();
   const username = user?.profile?.preferred_username ?? "Guest";
 
   return (
@@ -45,18 +45,22 @@ const NavBar: React.FC = () => {
                   Events
                 </Link>
               )}
-              <Link
-                to="/dashboard/tickets"
-                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-primary/40 hover:text-white"
-              >
-                Tickets
-              </Link>
-              <Link
-                to="/dashboard/validate-qr"
-                className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-primary/40 hover:text-white"
-              >
-                Validate
-              </Link>
+              {isAttendee && (
+                <Link
+                  to="/dashboard/tickets"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-primary/40 hover:text-white"
+                >
+                  Tickets
+                </Link>
+              )}
+              {isStaff && (
+                <Link
+                  to="/dashboard/validate-qr"
+                  className="rounded-full border border-white/10 bg-white/5 px-4 py-2 transition hover:border-primary/40 hover:text-white"
+                >
+                  Validate
+                </Link>
+              )}
             </div>
           </div>
 

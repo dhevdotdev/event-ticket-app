@@ -45,7 +45,7 @@ const router = createBrowserRouter([
   {
     path: "/events/:eventId/purchase/:ticketTypeId",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ATTENDEE"]}>
         <PurchaseTicketPage />
       </ProtectedRoute>
     ),
@@ -65,7 +65,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/events",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ORGANIZER"]}>
         <DashboardListEventsPage />
       </ProtectedRoute>
     ),
@@ -73,7 +73,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/tickets",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ATTENDEE"]}>
         <DashboardListTickets />
       </ProtectedRoute>
     ),
@@ -81,7 +81,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/tickets/:id",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ATTENDEE"]}>
         <DashboardViewTicketPage />
       </ProtectedRoute>
     ),
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/validate-qr",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_STAFF"]}>
         <DashboardValidateQrPage />
       </ProtectedRoute>
     ),
@@ -97,7 +97,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/events/create",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ORGANIZER"]}>
         <DashboardManageEventPage />
       </ProtectedRoute>
     ),
@@ -105,7 +105,7 @@ const router = createBrowserRouter([
   {
     path: "/dashboard/events/update/:id",
     element: (
-      <ProtectedRoute>
+      <ProtectedRoute allowedRoles={["ROLE_ORGANIZER"]}>
         <DashboardManageEventPage />
       </ProtectedRoute>
     ),

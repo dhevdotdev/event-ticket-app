@@ -8,6 +8,15 @@ import { useParams } from "react-router";
 import NavBar from "@/components/nav-bar";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 
+const parseApiDate = (value?: Date | string): Date | undefined => {
+  if (!value) {
+    return undefined;
+  }
+
+  const parsed = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(parsed.getTime()) ? undefined : parsed;
+};
+
 const DashboardViewTicketPage: React.FC = () => {
   const [ticket, setTicket] = useState<TicketDetails | undefined>();
   const [qrCodeUrl, setQrCodeUrl] = useState<string | undefined>();
@@ -16,6 +25,8 @@ const DashboardViewTicketPage: React.FC = () => {
 
   const { id } = useParams();
   const { isLoading, user } = useAuth();
+  const eventStart = parseApiDate(ticket?.eventStart);
+  const eventEnd = parseApiDate(ticket?.eventEnd);
 
   useEffect(() => {
     if (isLoading || !user?.access_token || !id) {
@@ -92,8 +103,9 @@ const DashboardViewTicketPage: React.FC = () => {
           <div className="mb-8 flex items-center justify-center gap-2 text-white/70">
             <Calendar className="w-4 text-primary" />
             <div>
-              {format(ticket.eventStart, "Pp")} -{" "}
-              {format(ticket.eventEnd, "Pp")}
+              {eventStart && eventEnd
+                ? `${format(eventStart, "Pp")} - ${format(eventEnd, "Pp")}`
+                : "Event time unavailable"}
             </div>
           </div>
 

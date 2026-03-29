@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useRoles } from "@/hooks/use-roles";
 import { useAuth } from "react-oidc-context";
 import { Link, useNavigate } from "react-router";
 import PublicHeader from "@/components/public-header";
@@ -6,6 +7,7 @@ import { ArrowRight, ShieldCheck, Sparkles, Ticket } from "lucide-react";
 
 const OrganizersLandingPage: React.FC = () => {
   const { isLoading } = useAuth();
+  const { isOrganizer } = useRoles();
 
   const navigate = useNavigate();
 
@@ -34,9 +36,9 @@ const OrganizersLandingPage: React.FC = () => {
             <div className="mt-8 flex flex-wrap gap-4">
               <Button
                 className="h-12 rounded-full px-6 text-base text-primary-foreground"
-                onClick={() => navigate("/dashboard/events")}
+                onClick={() => navigate(isOrganizer ? "/dashboard/events" : "/login")}
               >
-                Create an event
+                {isOrganizer ? "Create an event" : "Organizer login"}
               </Button>
               <Button
                 variant="outline"
