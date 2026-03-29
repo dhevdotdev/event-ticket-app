@@ -97,16 +97,16 @@ const DateTimeSelect: React.FC<DateTimeSelectProperties> = ({
       )}
 
       {enabled && (
-        <div className="grid w-full gap-3 lg:grid-cols-[minmax(0,1fr)_180px]">
+        <div className="flex w-full flex-wrap gap-3">
           <Popover>
             <PopoverTrigger asChild>
               <Button
                 type="button"
                 variant="outline"
-                className="h-11 w-full min-w-0 justify-start rounded-xl border-white/10 bg-white/5 text-left text-white hover:bg-white/10"
+                className="h-11 w-full min-w-0 flex-1 justify-start rounded-xl border-white/10 bg-white/5 text-left text-white hover:bg-white/10 sm:min-w-[260px]"
               >
                 <CalendarIcon />
-                {date ? format(date, "PPP") : <span>Pick a Date</span>}
+                <span className="whitespace-nowrap">{date ? format(date, "PPP") : "Pick a Date"}</span>
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="start">
@@ -132,7 +132,7 @@ const DateTimeSelect: React.FC<DateTimeSelectProperties> = ({
             </PopoverContent>
           </Popover>
 
-          <div className="min-w-0">
+          <div className="w-full min-w-0 sm:w-[180px] sm:flex-none">
             <Input
               type="time"
               className="h-11 w-full min-w-0 rounded-xl border-white/10 bg-white/5 text-white [&::-webkit-calendar-picker-indicator]:invert"
@@ -593,7 +593,7 @@ const DashboardManageEventPage: React.FC = () => {
                   Sales windows
                 </CardTitle>
               </CardHeader>
-              <CardContent className="grid gap-5 lg:grid-cols-2">
+              <CardContent className="grid gap-5 2xl:grid-cols-2">
                 <div>
                   <label className="text-sm font-medium text-white/80">Sales Start</label>
                   <div className="mt-2 rounded-[1.3rem] border border-white/10 bg-white/5 p-4">
